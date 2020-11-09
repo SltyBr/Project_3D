@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
             let timer = getTimeRemaining(),
                 idInterval;
     
-            if ( timeRemaining > 0 ){
+            if ( timer.timeRemaining > 0 ){
                 timerHours.textContent = addZero(timer.hours);
                 timerMinutes.textContent = addZero(timer.minutes);
                 timerSeconds.textContent = addZero(timer.seconds);
@@ -46,6 +46,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    countTimer('9 nov 2020');
+    countTimer('10 nov 2020');
 });
 
