@@ -89,11 +89,12 @@ window.addEventListener('DOMContentLoaded', () => {
         anchors.forEach((item)=>{ // плавная прокрутка по якорям
             item.addEventListener('click', (event)=>{
                 event.preventDefault();
-                const blockId = item.getAttribute('href');
+								const blockId = item.getAttribute('href');
+								if(blockId !== '#close'){
                 document.querySelector('' + blockId).scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
-                });
+                });}
             });
         });
     };
