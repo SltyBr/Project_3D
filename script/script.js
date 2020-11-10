@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const btnMenu = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
 			anchors = document.querySelectorAll('a[href^="#"]');
-			
+
 		const handlerMenu = ()=>{
 				menu.classList.toggle('active-menu');
 		};
@@ -90,7 +90,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			item.addEventListener('click', (event)=>{
 				event.preventDefault();
 				const blockId = item.getAttribute('href');
-				if(blockId !== '#close'){
+				if(blockId !== '#close' && blockId.length > 2){
+					console.log(blockId.length);
 				document.querySelector(`${blockId}`).scrollIntoView({
 					behavior: 'smooth',
 					block: 'start'
@@ -143,34 +144,81 @@ window.addEventListener('DOMContentLoaded', () => {
 	// tabs
 
 	const tabs = ()=>{
-			const tabHeader = document.querySelector('.service-header'),
-					tab = tabHeader.querySelectorAll('.service-header-tab'),
-					tabContent = document.querySelectorAll('.service-tab');
+		const tabHeader = document.querySelector('.service-header'),
+			tab = tabHeader.querySelectorAll('.service-header-tab'),
+			tabContent = document.querySelectorAll('.service-tab');
 
-			const toggleTabContent = (index) =>{
-				for (let i = 0; i < tabContent.length; i++){
-					if (index === i){
-						tab[i].classList.add('active');
-						tabContent[i].classList.remove('d-none');
-					} else{
-						tab[i].classList.remove('active');
-						tabContent[i].classList.add('d-none');
-					}
-				}
-			};
+	const toggleTabContent = (index) =>{
+		for (let i = 0; i < tabContent.length; i++){
+			if (index === i){
+				tab[i].classList.add('active');
+				tabContent[i].classList.remove('d-none');
+			} else{
+				tab[i].classList.remove('active');
+				tabContent[i].classList.add('d-none');
+			}
+		}
+	};
 
-			tabHeader.addEventListener('click', (event)=>{
-					let target = event.target;
-							target = target.closest('.service-header-tab');				
-					if (target){
-							tab.forEach((item, i)=>{
-									if(item === target){
-											toggleTabContent(i);
-									}
-							});
-					}				
-			});
+	tabHeader.addEventListener('click', (event)=>{
+			let target = event.target;
+					target = target.closest('.service-header-tab');				
+			if (target){
+					tab.forEach((item, i)=>{
+							if(item === target){
+									toggleTabContent(i);
+							}
+					});
+			}				
+		});
 	};
 	tabs();
+
+	//slider
+
+	const slider = ()=>{
+		const slide = document.querySelectorAll('.portfolio-item'),
+				btn = document.querySelectorAll('.portfolio-btn'),
+				dot = document.querySelectorAll('.dot'),
+				slider = document.querySelector('.portfolio-content');
+
+		let currentSlide = 0;
+
+		const prevSlide = (elem, index, strClass)=>{
+			elem[index].classList.remove(strClass);
+		};	
+
+		const nextSlide = (elem, index, strClass)=>{
+			elem[index].classList.add(strClass);
+		};
+
+		const autoPlaySlide = ()=>{
+				prevSlide(slide, currentSlide, 'portfolio-item-active');
+				prevSlide(dot, currentSlide, 'dot-active');
+				currentSlide++;
+				if(currentSlide >= slide.length){
+					currentSlide = 0;
+				}
+				nextSlide(slide, currentSlide, 'portfolio-item-active');
+				nextSlide(dot, currentSlide, 'dot-active');
+		};
+
+		const startSlide = (time)=>{
+			setInterval(autoPlaySlide, time);
+		};
+
+		const stopSlide = ()=>{
+
+		};
+
+ 		slider.addEventListener('click', (event)=>{
+			event.preventDefault();
+			let target = event.target;
+
+		});
+
+		startSlide(10000);
+	};
+	slider();
 });
 
