@@ -133,5 +133,19 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     togglePopup();
 
+    // tabs
+
+    const tabs = ()=>{
+        const tabHeader = document.querySelector('.service-header'),
+            tab = tabHeader.querySelectorAll('.service-header-tab'),
+            tabContent = document.querySelectorAll('.service-tab');
+
+            tabHeader.addEventListener('click', (event)=>{
+                let target = event.target;
+
+                
+            });
+    };
+    tabs();
 });
 
