@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('click', (event)=>{
                 event.preventDefault();
 								const blockId = item.getAttribute('href');
-								if(blockId !== '#close'){
+								if(blockId !== '#close' && blockId.length > 2){
                 document.querySelector('' + blockId).scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
