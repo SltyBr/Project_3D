@@ -82,7 +82,15 @@ window.addEventListener('DOMContentLoaded', () => {
 			let target = event.target;
 			if(target){
 				handlerMenu();
-			}
+			}else if (target.matches('a[href^="#"]')){
+				target.preventDefault();
+					const blockId = target.getAttribute('href');
+					if(blockId !== '#close' && blockId.length > 2){
+					document.querySelector(`${blockId}`).scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});}
+				}
 		});
 		btnMenu.addEventListener('click', handlerMenu);
 
@@ -91,7 +99,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				event.preventDefault();
 				const blockId = item.getAttribute('href');
 				if(blockId !== '#close' && blockId.length > 2){
-					console.log(blockId.length);
 				document.querySelector(`${blockId}`).scrollIntoView({
 					behavior: 'smooth',
 					block: 'start'
@@ -182,7 +189,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				dot = document.querySelectorAll('.dot'),
 				slider = document.querySelector('.portfolio-content');
 
-		let currentSlide = 0;
+		let currentSlide = 0,
+				interval;
 
 		const prevSlide = (elem, index, strClass)=>{
 			elem[index].classList.remove(strClass);
@@ -203,22 +211,61 @@ window.addEventListener('DOMContentLoaded', () => {
 				nextSlide(dot, currentSlide, 'dot-active');
 		};
 
-		const startSlide = (time)=>{
-			setInterval(autoPlaySlide, time);
+		const startSlide = (time = 3000)=>{
+			interval = setInterval(autoPlaySlide, time);
 		};
 
 		const stopSlide = ()=>{
-
+			clearInterval(interval);
 		};
 
  		slider.addEventListener('click', (event)=>{
 			event.preventDefault();
+			
 			let target = event.target;
 
+			if (!target.matches('.portfolio-btn, .dot')){
+				return;
+			}
+			prevSlide(slide, currentSlide, 'portfolio-item-active');
+			prevSlide(dot, currentSlide, 'dot-active');
+
+			if(target.matches('#arrow-right')){
+				currentSlide++;
+			} else if(target.matches('#arrow-left')){
+				currentSlide--;
+			} else if(target.matches('.dot')){
+				dot.forEach((element, index)=>{
+					if (element === target){
+						currentSlide = index;
+					}
+				});
+			}
+			if(currentSlide >= slide.length){
+				currentSlide = 0;
+			}else if (currentSlide < 0){
+				currentSlide = slide.length - 1;
+			}
+
+			nextSlide(slide, currentSlide, 'portfolio-item-active');
+			nextSlide(dot, currentSlide, 'dot-active');
 		});
 
-		startSlide(10000);
+		slider.addEventListener('mouseover', (event)=>{
+			if (event.target.matches('.portfolio-btn') || event.target.matches('.dot')){
+				stopSlide();
+			}
+		});
+		slider.addEventListener('mouseout', (event)=>{
+			if (event.target.matches('.portfolio-btn') || event.target.matches('.dot')){
+				startSlide();
+			}
+		});
+
+		startSlide();
 	};
 	slider();
+
+	
 });
 
