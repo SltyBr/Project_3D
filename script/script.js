@@ -89,8 +89,8 @@ window.addEventListener('DOMContentLoaded', () => {
         anchors.forEach((item)=>{ // плавная прокрутка по якорям
             item.addEventListener('click', (event)=>{
                 event.preventDefault();
-                const blockId = event.target.getAttribute('href').substr(1);
-                document.getElementById(blockId).scrollIntoView({
+                const blockId = item.getAttribute('href');
+                document.querySelector('' + blockId).scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
