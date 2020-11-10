@@ -76,19 +76,21 @@ window.addEventListener('DOMContentLoaded', () => {
 			menuItem = menu.querySelectorAll('ul>li'),
 			anchors = document.querySelectorAll('a[href^="#"]');
 
-		menu.addEventListener('click', (event)=>{
-			console.log(event.target);
-		});
 		const handlerMenu = ()=>{
 				menu.classList.toggle('active-menu');
 		};
+
+		menu.addEventListener('click', (event)=>{
+			let target = event.target;
+			console.log(target);
+		});
 		btnMenu.addEventListener('click', handlerMenu);
-/* 
+
 
 		closeBtn.addEventListener('click', handlerMenu);
 
 		menuItem.forEach((item) => item.addEventListener('click', handlerMenu));
-
+/*
 		anchors.forEach((item)=>{ // плавная прокрутка по якорям
 			item.addEventListener('click', (event)=>{
 				event.preventDefault();
