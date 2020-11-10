@@ -72,9 +72,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	const toggleMenu = ()=>{
 		const btnMenu = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
-			closeBtn = document.querySelector('.close-btn'),
-			menuItem = menu.querySelectorAll('ul>li'),
 			anchors = document.querySelectorAll('a[href^="#"]');
+
 
 		const handlerMenu = ()=>{
 				menu.classList.toggle('active-menu');
@@ -82,25 +81,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		menu.addEventListener('click', (event)=>{
 			let target = event.target;
-			console.log(target);
+			if(target){
+				handlerMenu();
+			}
 		});
 		btnMenu.addEventListener('click', handlerMenu);
 
-
-		closeBtn.addEventListener('click', handlerMenu);
-
-		menuItem.forEach((item) => item.addEventListener('click', handlerMenu));
-/*
 		anchors.forEach((item)=>{ // плавная прокрутка по якорям
 			item.addEventListener('click', (event)=>{
 				event.preventDefault();
 				const blockId = item.getAttribute('href');
-				document.querySelector('' + blockId).scrollIntoView({
+				if(blockId !== '#close'){
+				document.querySelector(`${blockId}`).scrollIntoView({
 					behavior: 'smooth',
 					block: 'start'
-				});
+				});}
 			});
-		}); */
+		});
 	};
 	toggleMenu();
 
