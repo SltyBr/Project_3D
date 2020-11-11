@@ -70,31 +70,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//menu
 	const toggleMenu = ()=>{
-		const btnMenu = document.querySelector('.menu'),
-			menu = document.querySelector('menu'),
-			anchors = document.querySelectorAll('a[href^="#"]');
+		const menu = document.querySelectorAll('menu, .menu');
 			
-		const handlerMenu = ()=>{
-				menu.classList.toggle('active-menu');
+		const handlerMenu = (i = 1)=>{
+				menu[i].classList.toggle('active-menu');
 		};
 
-		menu.addEventListener('click', (event)=>{
-			let target = event.target;
-			if(target){
-				handlerMenu();
-			}
-		});
-		btnMenu.addEventListener('click', handlerMenu);
-
-		anchors.forEach((item)=>{ // плавная прокрутка по якорям
+		menu.forEach((item)=>{
 			item.addEventListener('click', (event)=>{
-				event.preventDefault();
-				const blockId = item.getAttribute('href');
-				if(blockId !== '#close' && blockId.length > 2){
-				document.querySelector(`${blockId}`).scrollIntoView({
-					behavior: 'smooth',
-					block: 'start'
-				});}
+				let target = event.target;
+				if(target){
+					handlerMenu();
+				}
+				if(target.matches('a[href^="#"]')){
+					event.preventDefault();
+					const blockId = target.getAttribute('href');
+					if(blockId !== '#close' && blockId.length > 2){
+					document.querySelector(`${blockId}`).scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});}
+				}
 			});
 		});
 	};
