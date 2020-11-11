@@ -72,8 +72,6 @@ window.addEventListener('DOMContentLoaded', () => {
 const toggleMenu = ()=>{
 	const menu = document.querySelectorAll('menu, .menu');
 
-	console.log(menu);
-		
 	const handlerMenu = (item)=>{
 			item.classList.toggle('active-menu');
 	};
@@ -177,11 +175,27 @@ toggleMenu();
 		const slide = document.querySelectorAll('.portfolio-item'),
 				btn = document.querySelectorAll('.portfolio-btn'),
 				dot = document.querySelectorAll('.dot'),
-				slider = document.querySelector('.portfolio-content');
+				dotFirst = document.querySelector('.dot'),
+				slider = document.querySelector('.portfolio-content'),
+				portfolioDots = document.querySelector('.portfolio-dots'),
+				dots = document.createElement('li');
+
+				dots.classList.add('dot');
+				portfolioDots.append(dots);
+				portfolioDots.append(dots);
 
 		let currentSlide = 0;
 		let interval;
 
+		let cloneDot;
+
+/*  		for (let i = 0; i < slide.length; i++){
+			cloneDot = dotFirst.cloneNode();
+			cloneDot.classList.remove('dot-active');
+			portfolioDots.insertAdjacentElement('beforeEnd', cloneDot);
+		} */
+
+			
 		const prevSlide = (elem, index, strClass)=>{
 			elem[index].classList.remove(strClass);
 		};	
@@ -201,7 +215,7 @@ toggleMenu();
 				nextSlide(dot, currentSlide, 'dot-active');
 		};
 
-		const startSlide = (time = 3000)=>{
+		const startSlide = (time = 310000)=>{
 			interval = setInterval(autoPlaySlide, time);
 		};
 
