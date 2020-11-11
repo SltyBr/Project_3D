@@ -71,21 +71,23 @@ window.addEventListener('DOMContentLoaded', () => {
 //menu
 const toggleMenu = ()=>{
 	const menu = document.querySelectorAll('menu, .menu');
+
+	console.log(menu);
 		
-	const handlerMenu = (i = 1)=>{
-			menu[i].classList.toggle('active-menu');
+	const handlerMenu = (item)=>{
+			item.classList.toggle('active-menu');
 	};
 
-	menu.forEach((item)=>{
+	menu.forEach((item, i)=>{
 		item.addEventListener('click', (event)=>{
 			let target = event.target;
 			if(target){
-				handlerMenu();
+				handlerMenu(document.querySelector('menu'));
 			}
 			if(target.matches('a[href^="#"]')){
 				event.preventDefault();
 				const blockId = target.getAttribute('href');
-				if(blockId){
+				if(blockId !== '#close'){
 				document.querySelector(`${blockId}`).scrollIntoView({
 					behavior: 'smooth',
 					block: 'start'
