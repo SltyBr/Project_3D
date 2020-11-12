@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
 	function animate({timing, draw, duration}) { // паттерн анимации
 
@@ -66,32 +66,42 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	countTimer('11 nov 2020');
+	countTimer('14 nov 2020');
 
 //menu
 const toggleMenu = ()=>{
-	const menu = document.querySelector('menu');
+	const menu = document.querySelector('menu'),
+				menuBtn = document.querySelector('.menu'),
+				closeBtn = document.querySelector('.close-btn'),
+				serviceBtn = document.querySelector('main>a');
 		
-	const handlerMenu = (item)=>{
-			item.classList.toggle('active-menu');
+	const handlerMenu = ()=>{
+		menu.classList.toggle('active-menu');
 	};
 
-	menu.forEach((item, i)=>{
-		item.addEventListener('click', (event)=>{
-			let target = event.target;
-			if(target){
-				handlerMenu(document.querySelector('menu'));
-			}
-			if(target.matches('a[href^="#"]')){
-				event.preventDefault();
-				const blockId = target.getAttribute('href');
-				if(blockId !== '#close'){
-				document.querySelector(`${blockId}`).scrollIntoView({
-					behavior: 'smooth',
-					block: 'start'
-				});}
-			}
-		});
+	document.addEventListener('click', (event)=>{
+		let target = event.target;
+		if(target.closest('.menu') === menuBtn || target === closeBtn){
+			handlerMenu();
+		}else if(target.matches('a[href^="#"]')){
+			event.preventDefault();
+			const blockId = target.getAttribute('href');
+			if(blockId !== '#close' && blockId.length > 2){
+			document.querySelector(`${blockId}`).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+			handlerMenu();
+		}
+		}else if (target.closest('main>a') === serviceBtn){
+			event.preventDefault();
+			const blockId = target.closest('main>a').getAttribute('href');
+ 			if(blockId !== '#close'){
+			document.querySelector(`${blockId}`).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});}
+		}
 	});
 };
 toggleMenu();
@@ -253,4 +263,5 @@ toggleMenu();
 	};
 	slider();
 });
+
 
