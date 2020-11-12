@@ -82,7 +82,7 @@ const toggleMenu = ()=>{
 
 	const smoothScroll = (item)=>{
 		const blockId = item.getAttribute('href');
-			if(blockId !== '#close' && blockId.length > 2){
+			if(blockId){
 			document.querySelector(`${blockId}`).scrollIntoView({
 				behavior: 'smooth',
 				block: 'start'
@@ -93,7 +93,7 @@ const toggleMenu = ()=>{
 		let target = event.target;
 		if(target.closest('.menu') === menuBtn || target === closeBtn){
 			handlerMenu();
-		}else if(target.matches('a[href^="#"]')){
+		}else if(target.matches('a[href^="#"]') && target.closest('menu')){
 			event.preventDefault();
 			smoothScroll(target);
 			handlerMenu();	
