@@ -101,7 +101,7 @@ const toggleMenu = ()=>{
 			event.preventDefault();
 			target = target.closest('main>a');
 			smoothScroll(target);
-		} else if(target.closest('body') === body){
+		} else if(target.closest('body') === body && !target.closest('menu')){
 			menu.classList.remove('active-menu');
 		}
 	});
