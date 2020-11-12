@@ -183,29 +183,25 @@ toggleMenu();
 
 	const slider = ()=>{
 		const slide = document.querySelectorAll('.portfolio-item'),
-				btn = document.querySelectorAll('.portfolio-btn'),
-				dot = document.querySelectorAll('.dot'),
-				dotFirst = document.querySelector('.dot'),
-				slider = document.querySelector('.portfolio-content'),
-				portfolioDots = document.querySelector('.portfolio-dots'),
-				dots = document.createElement('li');
+			slider = document.querySelector('.portfolio-content'),
+			portfolioDots = document.querySelector('.portfolio-dots');
+		let dot = document.querySelectorAll('.dot'),
+			currentSlide = 0,
+			interval;
 
+		const createList = ()=>{ // функция создания списка, в зависимости от количества слайдов
+			for (let i = 0; i < slide.length; i++){
+				let dots = document.createElement('li');
 				dots.classList.add('dot');
 				portfolioDots.append(dots);
-				portfolioDots.append(dots);
+				if (i === currentSlide){
+					dots.classList.add('dot-active');
+				}
+			}
+			dot = document.querySelectorAll('.dot');
+		};
+		createList();
 
-		let currentSlide = 0;
-		let interval;
-
-		let cloneDot;
-
-/*  		for (let i = 0; i < slide.length; i++){
-			cloneDot = dotFirst.cloneNode();
-			cloneDot.classList.remove('dot-active');
-			portfolioDots.insertAdjacentElement('beforeEnd', cloneDot);
-		} */
-
-			
 		const prevSlide = (elem, index, strClass)=>{
 			elem[index].classList.remove(strClass);
 		};	
