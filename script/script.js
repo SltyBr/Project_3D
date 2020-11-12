@@ -221,7 +221,7 @@ toggleMenu();
 				nextSlide(dot, currentSlide, 'dot-active');
 		};
 
-		const startSlide = (time = 310000)=>{
+		const startSlide = (time = 3000)=>{
 			interval = setInterval(autoPlaySlide, time);
 		};
 
