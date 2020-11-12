@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //menu
 const toggleMenu = ()=>{
-	const menu = document.querySelectorAll('menu, .menu');
+	const menu = document.querySelector('menu');
 		
 	const handlerMenu = (item)=>{
 			item.classList.toggle('active-menu');
