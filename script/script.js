@@ -193,12 +193,12 @@ toggleMenu();
 			for (let i = 0; i < slide.length; i++){
 				let dots = document.createElement('li');
 				dots.classList.add('dot');
-				portfolioDots.append(dots);
+				portfolioDots.insertAdjacentElement('beforeend', dots);
 				if (i === currentSlide){
 					dots.classList.add('dot-active');
 				}
 			}
-			dot = document.querySelectorAll('.dot');
+			return (dot = document.querySelectorAll('.dot'));
 		};
 		createList();
 
