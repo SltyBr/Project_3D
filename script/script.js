@@ -114,24 +114,24 @@ toggleMenu();
 					docElem = document.documentElement;
 
 
-			popupBtn.forEach((item)=>{
-					item.addEventListener('click', ()=>{
-						if (docElem.scrollWidth < 769){
-							popup.style.display = 'block';
-						} else {
-							popup.style.display = 'block';
-							animate({
-								duration: 600,
-								timing(timeFraction) {
-										return 1 - Math.sin(Math.acos(timeFraction));
-								},
-								draw(progress) {
-										popupContent.style.opacity = progress;
-								}
-							});
-							}
+		popupBtn.forEach((item)=>{
+			item.addEventListener('click', ()=>{
+				if (docElem.scrollWidth < 769){
+					popup.style.display = 'block';
+				} else {
+					popup.style.display = 'block';
+					animate({
+						duration: 600,
+						timing(timeFraction) {
+								return 1 - Math.sin(Math.acos(timeFraction));
+						},
+						draw(progress) {
+								popupContent.style.opacity = progress;
+						}
 					});
+					}
 			});
+		});
 
 			popup.addEventListener('click', (event)=>{
 				let target = event.target;
@@ -299,7 +299,7 @@ toggleMenu();
 	changePhoto();
 
 	// ввод цифр в калькулятор
-	const calcDigOnly = ()=>{
+	const calcDigitsOnly = ()=>{
 		const calc = document.querySelector('.calc'),
 					calcInputs = calc.querySelectorAll('input');
 
@@ -309,6 +309,7 @@ toggleMenu();
 			});
 		});
 	};
-	calcDigOnly();
+	calcDigitsOnly();
+
 });
 
