@@ -274,5 +274,41 @@ toggleMenu();
 		
 	};
 	slider();
+
+	// смена фото
+	const changePhoto = ()=>{
+		const command = document.getElementById('command');
+
+		const mouseOver = event => {
+			const target = event.target;
+			if (target.matches('.command__photo')) {
+				target.dataset.image = target.src;
+				target.src = target.dataset.img;
+			}
+		};
+		const mouseOut = event => {
+			const target = event.target;
+			if (target.matches('.command__photo')) {
+				target.src = target.dataset.image;
+			}
+		};
+
+		command.addEventListener('mouseover', mouseOver);
+		command.addEventListener('mouseout', mouseOut);
+	};
+	changePhoto();
+
+	// ввод цифр в калькулятор
+	const calcDigOnly = ()=>{
+		const calc = document.querySelector('.calc'),
+					calcInputs = calc.querySelectorAll('input');
+
+		calcInputs.forEach((item)=>{
+			item.addEventListener('input', ()=>{
+				item.value = item.value.replace(/\D/g, '');
+			});
+		});
+	};
+	calcDigOnly();
 });
 
