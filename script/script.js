@@ -365,10 +365,22 @@ toggleMenu();
 		const statusMessage = document.createElement('div');
 		statusMessage.style.cssText = 'font-size: 2rem; color: #19b5fe';
 
+		formInputs.forEach((item)=>{
+			item.addEventListener('input', ()=>{
+			if (item.classList.contains('form-phone')){
+				item.value = item.value.replace(/\D/g, '');
+			}
+			if (item.classList.contains('form-name')){
+				item.value = item.value.replace(/\D/g, '');
+			}
+			if (item.classList.contains('form-email')){
+				item.value = item.value.replace(/\D/g, '');
+			}
+			});
+		});
+
 		form.addEventListener('submit', (event)=>{
 			event.preventDefault();
-			let target = event.target;
-			console.log(target.closest('input'));
 			form.append(statusMessage);
 			statusMessage.textContent = loadMessage;
 
@@ -380,10 +392,10 @@ toggleMenu();
 			});
 			postData(body, ()=>{
 				statusMessage.textContent = successMessage;
-
-				if (target.closest('input')){
-					target.value = '';
-				}
+				
+				formInputs.forEach((item)=>{
+					item.value = '';
+				});
 			}, (error) =>{
 				statusMessage.textContent = errorMessage;
 				console.error(error);
