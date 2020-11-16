@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
-
-	function animate({timing, draw, duration}) { // паттерн анимации
+	// паттерн анимации
+	function animate({timing, draw, duration}) {
 			let start = performance.now();	
 			requestAnimationFrame(function animate(time) {
 				let timeFraction = (time - start) / duration;
@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	countTimer('16 nov 2020');
+	countTimer('24 nov 2020');
 
 //menu
 const toggleMenu = ()=>{
@@ -351,5 +351,32 @@ toggleMenu();
 		});
 	};
 	calc();
+
+	//send-ajax=form
+
+	const sendForm = ()=>{
+		const errorMessage = 'Что-то пошло не так',
+				loadMessage = 'Загрузка...',
+				successMessage = 'Загрузка прошла успешно';
+
+		const form = document.getElementById('form1');
+
+		const statusMessage = document.createElement('div');
+		statusMessage.style.cssText = 'font-size: 2rem';
+
+		form.addEventListener('submit', (event)=>{
+			event.preventDefault();
+			form.append(statusMessage);
+
+			const request = new XMLHttpRequest();
+
+			request.open('POST', './server.php');
+			request.setRequestHeader('Content-Type', 'multipart/form-data');
+			const formData = new FormData(form);
+			request.send(formData);
+
+		});
+	};
+	sendForm();
 });
 
