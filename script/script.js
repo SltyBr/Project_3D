@@ -364,8 +364,18 @@ toggleMenu();
 	
 			const statusMessage = document.createElement('div');
 			statusMessage.style.cssText = 'font-size: 2rem; color: #19b5fe';
+
+			const clearStatusMessage = ()=>{
+				setTimeout(function(){
+					statusMessage.textContent = '';
+				}, 5000);
+			};
+
 	
 			formInputs.forEach((item)=>{
+				if (item.classList.contains('form-email')){
+					item.required = true;
+				}
 				item.addEventListener('input', ()=>{
 				if (item.classList.contains('form-phone')){
 					item.value = item.value.replace (/[^0-9+]/, '');
@@ -397,7 +407,7 @@ toggleMenu();
 					statusMessage.textContent = errorMessage;
 					console.error(error);
 				});
-	
+				clearStatusMessage();
 			});
 	
 			const postData = (body, outputData, errorData)=>{
