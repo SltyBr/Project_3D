@@ -355,24 +355,14 @@ toggleMenu();
 		//send-ajax=form
 
 	const sendForm = (formId)=>{
-		const errorMessage = 'Что-то пошло не так',
-				loadMessage = 'Загрузка...',
-				successMessage = 'Мы скоро с Вами свяжемся!';
+		const successMessage = 'Мы скоро с Вами свяжемся!',
+					loadMessage = 'Загрузка...';
 
 		const form = document.getElementById(`${formId}`),
 					formInputs = form.querySelectorAll('input');
 
-		const statusMessage = document.createElement('div');
-		statusMessage.style.cssText = 'font-size: 2rem; color: #19b5fe';
 
-		const clearStatusMessage = ()=>{
-			setTimeout(function(){
-				statusMessage.textContent = '';
-			}, 5000);
-		};
-
-
-		formInputs.forEach((item)=>{
+		formInputs.forEach((item)=>{ // определяем валидацию символов ввода
 			if (item.classList.contains('form-email')){
 				item.required = true;
 			}
@@ -388,48 +378,65 @@ toggleMenu();
 
 		form.addEventListener('submit', (event)=>{
 			event.preventDefault();
-			form.append(statusMessage);
-			statusMessage.textContent = loadMessage;
+			let body = {};
+			const messageContent = (content)=>{  // функция создания сообщения о статусе заявки
+				let successMessage = document.createElement('div');
+					successMessage.style.cssText = 'font-size: 2rem; color: #19b5fe';
+					successMessage.textContent = content;
+				return successMessage;
+			}
+			const successMessageContent = messageContent(successMessage);
+			const loadMessageContent = messageContent(loadMessage);
+			form.append(loadMessageContent);
 
 			const formData = new FormData(form);
-			let body = {};
 
 			formData.forEach((val, key)=>{
 				body[key] = val;
 			});
-			postData(body, ()=>{
-				statusMessage.textContent = successMessage;
-				
+			postData(body)
+				.then(()=>{
+					form.removeChild(loadMessageContent);
+					form.append(successMessageContent);
+				})
+				.catch((error)=>{
+					console.error(error);
+				});
+
+			const clearFormInputs = ()=>{ 
 				formInputs.forEach((item)=>{
 					item.value = '';
-				});
-			}, (error) =>{
-				statusMessage.textContent = errorMessage;
-				console.error(error);
-			});
+				})
+			}
+			setTimeout(clearFormInputs, 3000);
+
+			const clearStatusMessage = ()=>{
+				setTimeout(function(){
+					form.removeChild(successMessageContent);
+				}, 5000);
+			};
 			clearStatusMessage();
 		});
 
-		const postData = (body, outputData, errorData)=>{
-			const request = new XMLHttpRequest();
-			request.addEventListener('readystatechange', ()=>{
-				if(request.readyState !== 4){
-					return;
-				}
+		const postData = (body)=>{ //создаём промис
+			return new Promise((resolve, reject)=>{
+				const request = new XMLHttpRequest();
+				request.addEventListener('readystatechange', ()=>{
+					if(request.readyState !== 4){
+						return;
+					}
+					if(request.status !== 200){
+						reject(request.status);
+					} else{
+						resolve();
+					}
+				});
+				request.open('POST', './server.php');
+				request.setRequestHeader('Content-Type', 'application/json');
 
-				if(request.status === 200){
-					outputData();
-				} else{
-					errorData(request.status);
-				}
-			});
-			request.open('POST', './server.php');
-			request.setRequestHeader('Content-Type', 'application/json');
-
-			request.send(JSON.stringify(body));
-
+				request.send(JSON.stringify(body));
+			})
 		};
-
 
 	};
 	sendForm('form1');
