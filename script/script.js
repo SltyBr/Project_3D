@@ -370,8 +370,11 @@ toggleMenu();
 				if (item.classList.contains('form-phone')){
 					item.value = item.value.replace (/[^0-9+]/, '');
 				}
-				if (item.classList.contains('form-name') || item.classList.contains('mess')){
+				if (item.classList.contains('form-name')){
 					item.value = item.value.replace(/[^а-я ]/gi, '');
+				}
+				if (item.classList.contains('mess')){
+					item.value = item.value.replace(/[^а-я \W\d_]/gi, '');
 				}
 				});
 			});
