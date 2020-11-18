@@ -4,7 +4,8 @@
   "description": "3d GLO Project",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,17 @@
   },
   "homepage": "https://github.com/SltyBr/Project_3D#readme",
   "devDependencies": {
-    "webpack": "^5.5.1",
-    "webpack-cli": "^4.2.0"
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-loader": "^8.0.6",
+    "path": "^0.12.7",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
+  },
+  "dependencies": {
+    "element-closest-polyfill": "^1.0.2",
+    "nodelist-foreach-polyfill": "^1.2.0",
+    "smoothscroll-polyfill": "^0.4.4"
   }
 }
