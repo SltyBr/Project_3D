@@ -1,0 +1,23 @@
+{
+  "name": "project_3d",
+  "version": "1.0.0",
+  "description": "3d GLO Project",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SltyBr/Project_3D.git"
+  },
+  "author": "Pavel Popov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SltyBr/Project_3D/issues"
+  },
+  "homepage": "https://github.com/SltyBr/Project_3D#readme",
+  "devDependencies": {
+    "webpack": "^5.5.1",
+    "webpack-cli": "^4.2.0"
+  }
+}
