@@ -11,7 +11,7 @@ const sendForm = (formId)=>{
     }
     item.addEventListener('input', ()=>{
     if (item.classList.contains('form-phone')){
-      item.value = item.value.replace (/[^0-9+]/, '');
+      item.value = item.value.replace(/[^0-9+]/, '');
     }
     if (item.classList.contains('form-name') || item.matches('#form2-name')){
       item.value = item.value.replace(/[^а-я ]/gi, '');
