@@ -5,7 +5,6 @@ const sendForm = (formId)=>{
   const form = document.getElementById(`${formId}`),
         formInputs = form.querySelectorAll('input');
 
-
   formInputs.forEach((item)=>{ // определяем валидацию символов ввода
     if (item.classList.contains('form-email')){
       item.required = true;
@@ -14,7 +13,7 @@ const sendForm = (formId)=>{
     if (item.classList.contains('form-phone')){
       item.value = item.value.replace (/[^0-9+]/, '');
     }
-    if (item.classList.contains('form-name')){
+    if (item.classList.contains('form-name') || item.matches('#form2-name')){
       item.value = item.value.replace(/[^а-я ]/gi, '');
     }
     if (item.classList.contains('mess')){
