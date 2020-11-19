@@ -30,7 +30,7 @@ const sendForm = (formId)=>{
         successMessage.style.cssText = 'font-size: 2rem; color: #19b5fe';
         successMessage.textContent = content;
       return successMessage;
-    }
+    };
     const successMessageContent = messageContent(successMessage);
     const loadMessageContent = messageContent(loadMessage);
     form.append(loadMessageContent);
@@ -55,8 +55,8 @@ const sendForm = (formId)=>{
     const clearFormInputs = ()=>{ 
       formInputs.forEach((item)=>{
         item.value = '';
-      })
-    }
+      });
+    };
     setTimeout(clearFormInputs, 3000);
 
     const clearStatusMessage = ()=>{
