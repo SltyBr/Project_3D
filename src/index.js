@@ -16,7 +16,7 @@ import slider from './modules/slider';
 import changePhoto from './modules/changePhoto';
 import calc from './modules/calc';
 import sendForm from './modules/sendForm';
-import carouselSlider from './modules/carouselSlider';
+import sliderCarousel from './modules/sliderCarousel';
 
   //timer
 	countTimer();
@@ -44,4 +44,4 @@ import carouselSlider from './modules/carouselSlider';
   sendForm('form2');
 	sendForm('form3');
 	
-	carouselSlider();
+	sliderCarousel();
