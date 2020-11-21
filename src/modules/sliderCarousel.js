@@ -42,10 +42,10 @@ const sliderCarousel = () => {
       }
 
       addGloClass() {
-          this.main.classList.add('single-slider');
-          this.wrap.classList.add('single-slider__wrap');
+          this.main.classList.add('carousel-slider');
+          this.wrap.classList.add('carousel-slider__wrap');
           for (const item of this.slides) {
-              item.classList.add('single-slider__item');
+              item.classList.add('carousel-slider__item');
           }
       }
 
@@ -56,15 +56,15 @@ const sliderCarousel = () => {
               style.id = 'sliderCarousel-style';
           }
           style.textContent = `
-              .single-slider {
+              .carousel-slider {
                   overflow: hidden !important;
               }
-              .single-slider__wrap {
+              .carousel-slider__wrap {
                   display: flex !important;
                   transition: transform 0.5s !important;
                   will-change: transfrom !important;
               }
-              .single-slider__item {
+              .carousel-slider__item {
                   display: flex !important;
                   align-items: center;
                   justify-content: center;
@@ -105,30 +105,30 @@ const sliderCarousel = () => {
           this.prev = document.createElement('button');
           this.next = document.createElement('button');
 
-          this.prev.className = 'single-slider__prev';
-          this.next.className = 'single-slider__next';
+          this.prev.className = 'carousel-slider__prev';
+          this.next.className = 'carousel-slider__next';
 
           this.main.append(this.prev);
           this.main.append(this.next);
 
           const style = document.createElement('style');
           style.textContent = `
-              .single-slider__prev,
-              .single-slider__next {
+              .carousel-slider__prev,
+              .carousel-slider__next {
                   margin: 0 10px;
                   border: 20px solid transparent;
                   background: transparent;
               }
-              .single-slider__next {
+              .carousel-slider__next {
                   border-left-color: #19b5fe;
               }
-              .single-slider__prev {
+              .carousel-slider__prev {
                   border-right-color: #19b5fe;
               }
-              .single-slider__prev:hover,
-              .single-slider__next:hover,
-              .single-slider__prev:focus,
-              .single-slider__next:focus {
+              .carousel-slider__prev:hover,
+              .carousel-slider__next:hover,
+              .carousel-slider__prev:focus,
+              .carousel-slider__next:focus {
                   background: transparent;
                   outline: transparent;
               }
