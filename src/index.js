@@ -44,4 +44,5 @@ import sliderCarousel from './modules/sliderCarousel';
   sendForm('form2');
 	sendForm('form3');
 	
+	//slider-carousel
 	sliderCarousel();
