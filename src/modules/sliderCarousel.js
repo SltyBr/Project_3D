@@ -164,7 +164,6 @@ const sliderCarousel = () => {
       }
   }
 
-  // eslint-disable-next-line no-undef
   const carousel = new SliderCarousel({
       main: '.companies-wrapper',
       wrap: '.companies-hor',
