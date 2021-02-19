@@ -1,5 +1,5 @@
 	//timer
-	function countTimer(deadline = '21 nov 2020') {
+	function countTimer(deadline = '21 nov 2021') {
     const timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
         timerSeconds = document.querySelector('#timer-seconds');
